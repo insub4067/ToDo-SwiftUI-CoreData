@@ -13,7 +13,6 @@
 		C66E83A528983C850023D791 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C66E83A428983C850023D791 /* Preview Assets.xcassets */; };
 		C66E83AE28984CD70023D791 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83AD28984CD70023D791 /* CoreDataManager.swift */; };
 		C66E83B128984E0F0023D791 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C66E83AF28984E0F0023D791 /* DataModel.xcdatamodeld */; };
-		C66E83B52898585F0023D791 /* CreateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83B42898585F0023D791 /* CreateTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +23,6 @@
 		C66E83A428983C850023D791 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C66E83AD28984CD70023D791 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C66E83B028984E0F0023D791 /* TodoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoModel.xcdatamodel; sourceTree = "<group>"; };
-		C66E83B42898585F0023D791 /* CreateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +57,6 @@
 			children = (
 				C66E839D28983C840023D791 /* ToDo_SwiftUIApp.swift */,
 				C66E839F28983C840023D791 /* ContentView.swift */,
-				C66E83B42898585F0023D791 /* CreateTaskView.swift */,
 				C66E83AD28984CD70023D791 /* CoreDataManager.swift */,
 				C66E83AF28984E0F0023D791 /* DataModel.xcdatamodeld */,
 				C66E83A128983C850023D791 /* Assets.xcassets */,
@@ -150,7 +147,6 @@
 				C66E83A028983C840023D791 /* ContentView.swift in Sources */,
 				C66E83AE28984CD70023D791 /* CoreDataManager.swift in Sources */,
 				C66E839E28983C840023D791 /* ToDo_SwiftUIApp.swift in Sources */,
-				C66E83B52898585F0023D791 /* CreateTaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
