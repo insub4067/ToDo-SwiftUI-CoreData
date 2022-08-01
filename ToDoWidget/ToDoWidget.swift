@@ -43,8 +43,18 @@ struct SimpleEntry: TimelineEntry {
 struct ToDoWidgetEntryView : View {
     var entry: Provider.Entry
 
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.isDone, order: .reverse)]) var todos: FetchedResults<TodoEntity>
+//    let coreDataManager = CoreDataManager.shared
+
     var body: some View {
-        Text(entry.date, style: .time)
+
+        let taskList = todos.filter { todo in
+            todo.isDone == false
+        }
+
+        ForEach(taskList) { todo in
+            Text(todo.task ?? "Hello")
+        }
     }
 }
 

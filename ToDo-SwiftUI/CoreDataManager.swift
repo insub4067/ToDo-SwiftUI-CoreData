@@ -7,14 +7,11 @@
 
 import Foundation
 import CoreData
-import SwiftUI
 
 class CoreDataManager: ObservableObject {
 
     static let shared = CoreDataManager()
     let container = NSPersistentContainer(name: "DataModel")
-
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.isDone, order: .reverse)]) var todos: FetchedResults<TodoEntity>
 
     init() {
         container.loadPersistentStores { desc, error in

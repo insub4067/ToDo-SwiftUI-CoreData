@@ -10,6 +10,7 @@ import Combine
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.isDone, order: .reverse)]) var todos: FetchedResults<TodoEntity>
 
     @State private var textField = ""
     @State private var keybaordHeigh: CGFloat = 0.0
@@ -20,11 +21,11 @@ struct ContentView: View {
 
     var body: some View {
 
-        let taskList = coreDataManager.todos.filter { todo in
+        let taskList = todos.filter { todo in
             todo.isDone == false
         }
 
-        let doneTaskList = coreDataManager.todos.filter { todo in
+        let doneTaskList = todos.filter { todo in
             todo.isDone == true
         }
 
@@ -116,7 +117,7 @@ struct ContentView: View {
         }
         .confirmationDialog("삭제할 내용을 선택하세요", isPresented: self.$isShowSheet, titleVisibility: .visible) {
             Button("모두", role: .destructive){
-                coreDataManager.deleteArrayOfTodo(todos: Array(coreDataManager.todos), context: managedObjectContext)
+                coreDataManager.deleteArrayOfTodo(todos: Array(todos), context: managedObjectContext)
             }
             Button("할일"){
                 coreDataManager.deleteArrayOfTodo(todos: taskList, context: managedObjectContext)
