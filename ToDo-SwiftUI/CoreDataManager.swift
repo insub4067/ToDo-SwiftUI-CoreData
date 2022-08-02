@@ -6,19 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
 import CoreData
-
-public enum AppGroup: String {
-    case facts = "group.com.kim.widgetTodo"
-
-    public var containerURL: URL {
-        switch self {
-        case .facts:
-            return FileManager.default.containerURL(
-                forSecurityApplicationGroupIdentifier: self.rawValue)!
-        }
-    }
-}
 
 class CoreDataManager: ObservableObject {
 
@@ -41,9 +30,10 @@ class CoreDataManager: ObservableObject {
         }
     }
 
-    func addTodo(task: String, context: NSManagedObjectContext) {
+    func addTodo(task: String, segment: Int, context: NSManagedObjectContext) {
 
         let todo = TodoEntity(context: context)
+        todo.segment = Int64(segment)
         todo.uuid = UUID()
         todo.task = task
         todo.isDone = false
