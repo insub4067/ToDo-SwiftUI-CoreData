@@ -15,7 +15,7 @@ struct ListView: View {
 
     let coreDataManager = CoreDataManager.shared
 
-    @State private var textField = ""
+    @State private var currentText = ""
     @FocusState private var isFocused: Bool
 
     var body: some View {
@@ -30,9 +30,9 @@ struct ListView: View {
 
         List {
             Section("할일") {
-                TextField("입력", text: $textField) {
-                    coreDataManager.addTodo(task: textField, segment: segmentIndex, context: managedObjectContext)
-                    textField = ""
+                TextField("입력", text: $currentText) {
+                    coreDataManager.addTodo(task: currentText, segment: segmentIndex, context: managedObjectContext)
+                    currentText = ""
                 }
                 .focused($isFocused)
                 .textFieldStyle(.roundedBorder)
