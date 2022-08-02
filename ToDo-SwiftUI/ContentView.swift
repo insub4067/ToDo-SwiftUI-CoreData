@@ -71,6 +71,7 @@ struct ContentView: View {
                                     .padding(.trailing, 5)
 
                                     Text(todo.task ?? "")
+                                        .strikethrough()
                                 }
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button {

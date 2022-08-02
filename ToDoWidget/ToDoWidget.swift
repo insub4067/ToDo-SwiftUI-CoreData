@@ -43,7 +43,10 @@ struct SimpleEntry: TimelineEntry {
 struct ToDoWidgetEntryView : View {
     var entry: Provider.Entry
 
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     @FetchRequest(sortDescriptors: [SortDescriptor(\.isDone, order: .reverse)]) var todos: FetchedResults<TodoEntity>
+
 //    let coreDataManager = CoreDataManager.shared
 
     var body: some View {
@@ -61,10 +64,12 @@ struct ToDoWidgetEntryView : View {
 @main
 struct ToDoWidget: Widget {
     let kind: String = "ToDoWidget"
+    @StateObject private var coreDataManager = CoreDataManager.shared
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             ToDoWidgetEntryView(entry: entry)
+                .environment(\.managedObjectContext, coreDataManager.container.viewContext)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
