@@ -4,11 +4,3 @@
 //
 //  Created by Kim Insub on 2022/08/02.
 //
-
-import Foundation
-
-struct TodoModel {
-    var task: String
-    var isDone: Bool
-    var uuid: UUID
-}
