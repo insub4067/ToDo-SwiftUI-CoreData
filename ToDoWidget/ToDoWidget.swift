@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import CoreData
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -43,35 +44,24 @@ struct SimpleEntry: TimelineEntry {
 struct ToDoWidgetEntryView : View {
     var entry: Provider.Entry
 
-    @Environment(\.managedObjectContext) var managedObjectContext
-
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.isDone, order: .reverse)]) var todos: FetchedResults<TodoEntity>
-
-//    let coreDataManager = CoreDataManager.shared
-
     var body: some View {
-
-        let taskList = todos.filter { todo in
-            todo.isDone == false
-        }
-
-        ForEach(taskList) { todo in
-            Text(todo.task ?? "Hello")
-        }
+        Text("Hello")
     }
 }
 
 @main
 struct ToDoWidget: Widget {
-    let kind: String = "ToDoWidget"
     @StateObject private var coreDataManager = CoreDataManager.shared
+
+    let kind: String = "ToDoWidget"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             ToDoWidgetEntryView(entry: entry)
-                .environment(\.managedObjectContext, coreDataManager.container.viewContext)
+
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
     }
+
 }

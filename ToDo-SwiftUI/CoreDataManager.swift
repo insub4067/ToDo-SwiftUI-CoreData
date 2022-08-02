@@ -8,6 +8,18 @@
 import Foundation
 import CoreData
 
+public enum AppGroup: String {
+    case facts = "group.com.kim.widgetTodo"
+
+    public var containerURL: URL {
+        switch self {
+        case .facts:
+            return FileManager.default.containerURL(
+                forSecurityApplicationGroupIdentifier: self.rawValue)!
+        }
+    }
+}
+
 class CoreDataManager: ObservableObject {
 
     static let shared = CoreDataManager()
@@ -44,24 +56,23 @@ class CoreDataManager: ObservableObject {
         context.delete(todo)
 
         do{
-             try context.save()
-         } catch {
-             print("FAILED TO DELETE DATA")
-         }
+            try context.save()
+        } catch {
+            print("FAILED TO DELETE DATA")
+        }
     }
 
     func deleteArrayOfTodo(todos: [TodoEntity], context: NSManagedObjectContext) {
-
 
         for todo in todos {
             context.delete(todo)
         }
 
         do{
-             try context.save()
-         } catch {
-             print("FAILED TO DELETE DATA")
-         }
+            try context.save()
+        } catch {
+            print("FAILED TO DELETE DATA")
+        }
     }
 
     func editTodo(todo: TodoEntity, isDone: Bool, context: NSManagedObjectContext) {

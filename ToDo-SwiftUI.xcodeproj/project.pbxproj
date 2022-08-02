@@ -22,6 +22,7 @@
 		C66E83CB2898934E0023D791 /* ToDoWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C66E83BA2898934D0023D791 /* ToDoWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C66E83D0289893D10023D791 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83AD28984CD70023D791 /* CoreDataManager.swift */; };
 		C66E83D1289894560023D791 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C66E83AF28984E0F0023D791 /* DataModel.xcdatamodeld */; };
+		C66E83D62898EC090023D791 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83D52898EC090023D791 /* TodoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		C66E83D2289897030023D791 /* ToDo-SwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ToDo-SwiftUI.entitlements"; sourceTree = "<group>"; };
 		C66E83D32898978C0023D791 /* ToDoWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoWidgetExtension.entitlements; sourceTree = "<group>"; };
 		C66E83D42898CE420023D791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C66E83D52898EC090023D791 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				C66E839D28983C840023D791 /* ToDo_SwiftUIApp.swift */,
 				C66E839F28983C840023D791 /* ContentView.swift */,
 				C66E83AD28984CD70023D791 /* CoreDataManager.swift */,
+				C66E83D52898EC090023D791 /* TodoModel.swift */,
 				C66E83AF28984E0F0023D791 /* DataModel.xcdatamodeld */,
 				C66E83A128983C850023D791 /* Assets.xcassets */,
 				C66E83A328983C850023D791 /* Preview Content */,
@@ -255,6 +258,7 @@
 				C66E83B128984E0F0023D791 /* DataModel.xcdatamodeld in Sources */,
 				C66E83A028983C840023D791 /* ContentView.swift in Sources */,
 				C66E83C82898934E0023D791 /* ToDoWidget.intentdefinition in Sources */,
+				C66E83D62898EC090023D791 /* TodoModel.swift in Sources */,
 				C66E83AE28984CD70023D791 /* CoreDataManager.swift in Sources */,
 				C66E839E28983C840023D791 /* ToDo_SwiftUIApp.swift in Sources */,
 			);
@@ -410,6 +414,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ToDo-SwiftUI/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -442,6 +447,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ToDo-SwiftUI/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -37,7 +37,9 @@ struct ContentView: View {
                             ForEach(taskList) { todo in
                                 HStack{
                                     Button {
-                                        coreDataManager.editTodo(todo: todo, isDone: !todo.isDone, context: managedObjectContext)
+                                        withAnimation {
+                                            coreDataManager.editTodo(todo: todo, isDone: !todo.isDone, context: managedObjectContext)
+                                        }
                                     } label: {
                                         Image(systemName: todo.isDone ? "checkmark.square.fill" : "checkmark.square")
                                             .opacity( todo.isDone ? 1.0 : 0.3 )
@@ -62,7 +64,9 @@ struct ContentView: View {
                             ForEach(doneTaskList) { todo in
                                 HStack{
                                     Button {
-                                        coreDataManager.editTodo(todo: todo, isDone: !todo.isDone, context: managedObjectContext)
+                                        withAnimation {
+                                            coreDataManager.editTodo(todo: todo, isDone: !todo.isDone, context: managedObjectContext)
+                                        }
                                     } label: {
                                         Image(systemName: todo.isDone ? "checkmark.square.fill" : "checkmark.square")
                                             .opacity( todo.isDone ? 1.0 : 0.3 )
