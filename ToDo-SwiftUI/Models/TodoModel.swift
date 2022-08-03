@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TodoModel {
+struct TodoModel: Hashable {
     var task: String
     var isDone: Bool
     var uuid: UUID
