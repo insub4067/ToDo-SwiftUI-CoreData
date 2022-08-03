@@ -27,7 +27,7 @@ struct ContentView: View {
     ) var thirdTodoList: FetchedResults<TodoEntity>
 
     @State private var isSheetShowing: Bool = false
-    @State private var segmentIndex = 0
+    @State private var currentSelectedIndex = 0
 
     @AppStorage("영역1") var firstSegment: String = "카테고리"
     @AppStorage("영역2") var secondSegment: String =  "카테고리"
@@ -43,7 +43,7 @@ struct ContentView: View {
 
         NavigationView {
             VStack {
-                Picker("영역 구분", selection: $segmentIndex) {
+                Picker("영역 구분", selection: $currentSelectedIndex) {
                     Text(firstSegment).tag(0)
                     Text(secondSegment).tag(1)
                     Text(thirdSegment).tag(2)
@@ -51,14 +51,14 @@ struct ContentView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
 
-                if segmentIndex == 0 {
-                    ListView(todoList: firstTodoList, segmentIndex: segmentIndex)
+                if currentSelectedIndex == 0 {
+                    ListView(todoList: firstTodoList, segmentIndex: currentSelectedIndex)
                 }
-                else if segmentIndex == 1 {
-                    ListView(todoList: secondTodoList, segmentIndex: segmentIndex)
+                else if currentSelectedIndex == 1 {
+                    ListView(todoList: secondTodoList, segmentIndex: currentSelectedIndex)
                 }
-                else if segmentIndex == 2 {
-                    ListView(todoList: thirdTodoList, segmentIndex: segmentIndex)
+                else if currentSelectedIndex == 2 {
+                    ListView(todoList: thirdTodoList, segmentIndex: currentSelectedIndex)
                 }
             }
             .background(Color.background)
@@ -70,8 +70,6 @@ struct ContentView: View {
                         Image(systemName: "gear")
                     }
                 }
-            }
-            .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.principal) {
                     Text("왓투두")
                 }
