@@ -83,44 +83,49 @@ struct ContentView: View {
     }
 
     @ViewBuilder func settingView() -> some View {
-        Form {
-            HStack {
+        ZStack {
+            Form {
                 TextField(firstSegment, text: $firstSegmentName)
                     .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
-                Button {
-                    firstSegment = firstSegmentName
-                    firstSegmentName = ""
-                } label: {
-                    Text("저장하기")
-                }
-            }
 
-            HStack {
                 TextField(secondSegment, text: $secondSegmentName)
                     .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
-                Button {
-                    secondSegment = secondSegmentName
-                    secondSegmentName = ""
-                } label: {
-                    Text("저장하기")
-                }
-            }
 
-            HStack {
                 TextField(thirdSegment, text: $thirdSegmentName)
                     .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
-                Button {
-                    thirdSegment = thirdSegmentName
-                    thirdSegmentName = ""
-                } label: {
-                    Text("저장하기")
+            }
+            .padding(.top, 20)
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        if firstSegmentName != "" {
+                            firstSegment = firstSegmentName
+                            firstSegmentName = ""
+                        }
+
+                        else if secondSegmentName != "" {
+                            secondSegment = secondSegmentName
+                            secondSegmentName = ""
+
+                        }
+
+                        else if thirdSegmentName != "" {
+                            thirdSegment = thirdSegmentName
+                            thirdSegmentName = ""
+                        }
+                    } label: {
+                        Text("저장")
+                    }
+                    .padding()
                 }
+                Spacer()
             }
         }
     }
