@@ -91,11 +91,5 @@ struct ListView: View {
                 }
             }
         }
-        .toolbar {
-            ToolbarItemGroup(placement: ToolbarItemPlacement.keyboard) {
-                Button("") {}
-                Button("닫기") { isFocused = false } 
-            }
-        }
     }
 }

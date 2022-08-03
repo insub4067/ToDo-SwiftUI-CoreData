@@ -41,60 +41,65 @@ struct ContentView: View {
 
     var body: some View {
 
-        NavigationView {
-            VStack {
-                Picker("영역 구분", selection: $currentSelectedIndex) {
-                    Text(firstSegment).tag(0)
-                    Text(secondSegment).tag(1)
-                    Text(thirdSegment).tag(2)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
+        BackgroundView {
+            NavigationView {
+                VStack {
+                    Picker("영역 구분", selection: $currentSelectedIndex) {
+                        Text(firstSegment).tag(0)
+                        Text(secondSegment).tag(1)
+                        Text(thirdSegment).tag(2)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal)
 
-                if currentSelectedIndex == 0 {
-                    ListView(todoList: firstTodoList, segmentIndex: currentSelectedIndex)
-                }
-                else if currentSelectedIndex == 1 {
-                    ListView(todoList: secondTodoList, segmentIndex: currentSelectedIndex)
-                }
-                else if currentSelectedIndex == 2 {
-                    ListView(todoList: thirdTodoList, segmentIndex: currentSelectedIndex)
-                }
-            }
-            .background(Color.background)
-            .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                    Button {
-                        isSheetShowing = true
-                    } label: {
-                        Image(systemName: "gear")
+                    if currentSelectedIndex == 0 {
+                        ListView(todoList: firstTodoList, segmentIndex: currentSelectedIndex)
+                    }
+                    else if currentSelectedIndex == 1 {
+                        ListView(todoList: secondTodoList, segmentIndex: currentSelectedIndex)
+                    }
+                    else if currentSelectedIndex == 2 {
+                        ListView(todoList: thirdTodoList, segmentIndex: currentSelectedIndex)
                     }
                 }
-                ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                    Text("왓투두")
+                .background(Color.background)
+                .toolbar {
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                        Button {
+                            isSheetShowing = true
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
+                    ToolbarItem(placement: ToolbarItemPlacement.principal) {
+                        Text("왓투두")
+                    }
                 }
             }
+            .sheet(isPresented: $isSheetShowing) {
+                settingView()
+            }
         }
-        .sheet(isPresented: $isSheetShowing) {
-            settingView()
+        .onTapGesture {
+            self.endEditing()
         }
     }
+}
 
+// View Builder
+extension ContentView {
     @ViewBuilder func settingView() -> some View {
         ZStack {
             Form {
                 TextField(firstSegment, text: $firstSegmentName)
-                    .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
 
                 TextField(secondSegment, text: $secondSegmentName)
-                    .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
 
                 TextField(thirdSegment, text: $thirdSegmentName)
-                    .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
             }
@@ -108,16 +113,17 @@ struct ContentView: View {
                             firstSegmentName = ""
                         }
 
-                        else if secondSegmentName != "" {
+                        if secondSegmentName != "" {
                             secondSegment = secondSegmentName
                             secondSegmentName = ""
-
                         }
 
-                        else if thirdSegmentName != "" {
+                        if thirdSegmentName != "" {
                             thirdSegment = thirdSegmentName
                             thirdSegmentName = ""
                         }
+
+                        isSheetShowing = false
                     } label: {
                         Text("저장")
                     }
@@ -126,5 +132,12 @@ struct ContentView: View {
                 Spacer()
             }
         }
+    }
+}
+
+// function
+extension ContentView {
+    private func endEditing() {
+        UIApplication.shared.endEditing()
     }
 }
