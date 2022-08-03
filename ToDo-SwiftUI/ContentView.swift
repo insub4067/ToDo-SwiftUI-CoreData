@@ -29,9 +29,13 @@ struct ContentView: View {
     @State private var isSheetShowing: Bool = false
     @State private var segmentIndex = 0
 
-    @AppStorage("할일1") var firstSegment: String = "할일1"
-    @AppStorage("할일2") var secondSegment: String = "할일2"
-    @AppStorage("할일3") var thirdSegment: String = "할일3"
+    @AppStorage("영역1") var firstSegment: String = "카테고리"
+    @AppStorage("영역2") var secondSegment: String =  "카테고리"
+    @AppStorage("영역3") var thirdSegment: String = "카테고리"
+
+    @State var firstSegmentName: String = ""
+    @State var secondSegmentName: String = ""
+    @State var thirdSegmentName: String = ""
 
     let coreDataManager = CoreDataManager.shared
 
@@ -80,24 +84,43 @@ struct ContentView: View {
 
     @ViewBuilder func settingView() -> some View {
         Form {
-            Section("이름 바꾸기") {
-
-                TextField(firstSegment, text: $firstSegment)
+            HStack {
+                TextField(firstSegment, text: $firstSegmentName)
                     .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
+                Button {
+                    firstSegment = firstSegmentName
+                    firstSegmentName = ""
+                } label: {
+                    Text("저장하기")
+                }
+            }
 
-
-                TextField(secondSegment, text: $secondSegment)
+            HStack {
+                TextField(secondSegment, text: $secondSegmentName)
                     .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
+                Button {
+                    secondSegment = secondSegmentName
+                    secondSegmentName = ""
+                } label: {
+                    Text("저장하기")
+                }
+            }
 
-
-                TextField(thirdSegment, text: $thirdSegment)
+            HStack {
+                TextField(thirdSegment, text: $thirdSegmentName)
                     .foregroundColor(Color.gray)
                     .textFieldStyle(.plain)
                     .padding()
+                Button {
+                    thirdSegment = thirdSegmentName
+                    thirdSegmentName = ""
+                } label: {
+                    Text("저장하기")
+                }
             }
         }
     }
