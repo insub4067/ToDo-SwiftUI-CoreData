@@ -85,7 +85,9 @@
 		C66E839C28983C840023D791 /* ToDo-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				C66E83E5289A55FB0023D791 /* App */,
+				C66E83D42898CE420023D791 /* Info.plist */,
+				C66E83D2289897030023D791 /* ToDo-SwiftUI.entitlements */,
+				C66E839D28983C840023D791 /* ToDo_SwiftUIApp.swift */,
 				C66E83E2289A55B90023D791 /* Views */,
 				C66E83E3289A55CA0023D791 /* Models */,
 				C66E83E4289A55D50023D791 /* CoreData */,
@@ -147,16 +149,6 @@
 				C66E83AF28984E0F0023D791 /* DataModel.xcdatamodeld */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		C66E83E5289A55FB0023D791 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				C66E83D42898CE420023D791 /* Info.plist */,
-				C66E83D2289897030023D791 /* ToDo-SwiftUI.entitlements */,
-				C66E839D28983C840023D791 /* ToDo_SwiftUIApp.swift */,
-			);
-			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
