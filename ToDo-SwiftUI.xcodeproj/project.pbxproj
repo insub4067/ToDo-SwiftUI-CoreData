@@ -16,8 +16,6 @@
 		C66E83D62898EC090023D791 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83D52898EC090023D791 /* TodoModel.swift */; };
 		C66E83DA289924D80023D791 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83D9289924D80023D791 /* ListView.swift */; };
 		C66E83DC2899677D0023D791 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83DB2899677D0023D791 /* Color+.swift */; };
-		C66E83DF289A51F30023D791 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83DE289A51F30023D791 /* UIApplication+.swift */; };
-		C66E83E1289A55050023D791 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66E83E0289A55050023D791 /* BackgroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,8 +47,6 @@
 		C66E83D52898EC090023D791 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		C66E83D9289924D80023D791 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		C66E83DB2899677D0023D791 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
-		C66E83DE289A51F30023D791 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
-		C66E83E0289A55050023D791 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				C66E83DB2899677D0023D791 /* Color+.swift */,
-				C66E83DE289A51F30023D791 /* UIApplication+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -129,7 +124,6 @@
 			children = (
 				C66E839F28983C840023D791 /* ContentView.swift */,
 				C66E83D9289924D80023D791 /* ListView.swift */,
-				C66E83E0289A55050023D791 /* BackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,12 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C66E83E1289A55050023D791 /* BackgroundView.swift in Sources */,
 				C66E83DC2899677D0023D791 /* Color+.swift in Sources */,
 				C66E83B128984E0F0023D791 /* DataModel.xcdatamodeld in Sources */,
 				C66E83A028983C840023D791 /* ContentView.swift in Sources */,
 				C66E83DA289924D80023D791 /* ListView.swift in Sources */,
-				C66E83DF289A51F30023D791 /* UIApplication+.swift in Sources */,
 				C66E83D62898EC090023D791 /* TodoModel.swift in Sources */,
 				C66E83AE28984CD70023D791 /* CoreDataManager.swift in Sources */,
 				C66E839E28983C840023D791 /* ToDo_SwiftUIApp.swift in Sources */,

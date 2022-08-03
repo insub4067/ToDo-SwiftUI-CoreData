@@ -27,7 +27,7 @@ struct ListView: View {
         let doneTaskList = todoList.filter { todo in
             todo.isDone == true
         }
-
+        
         List {
             Section("할일") {
                 TextField("입력", text: $currentText) {

@@ -41,47 +41,42 @@ struct ContentView: View {
 
     var body: some View {
 
-        BackgroundView {
-            NavigationView {
-                VStack {
-                    Picker("영역 구분", selection: $currentSelectedIndex) {
-                        Text(firstSegment).tag(0)
-                        Text(secondSegment).tag(1)
-                        Text(thirdSegment).tag(2)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding(.horizontal)
-
-                    if currentSelectedIndex == 0 {
-                        ListView(todoList: firstTodoList, segmentIndex: currentSelectedIndex)
-                    }
-                    else if currentSelectedIndex == 1 {
-                        ListView(todoList: secondTodoList, segmentIndex: currentSelectedIndex)
-                    }
-                    else if currentSelectedIndex == 2 {
-                        ListView(todoList: thirdTodoList, segmentIndex: currentSelectedIndex)
-                    }
+        NavigationView {
+            VStack {
+                Picker("영역 구분", selection: $currentSelectedIndex) {
+                    Text(firstSegment).tag(0)
+                    Text(secondSegment).tag(1)
+                    Text(thirdSegment).tag(2)
                 }
-                .background(Color.background)
-                .toolbar {
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                        Button {
-                            isSheetShowing = true
-                        } label: {
-                            Image(systemName: "gear")
-                        }
-                    }
-                    ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                        Text("왓투두")
-                    }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+
+                if currentSelectedIndex == 0 {
+                    ListView(todoList: firstTodoList, segmentIndex: currentSelectedIndex)
+                }
+                else if currentSelectedIndex == 1 {
+                    ListView(todoList: secondTodoList, segmentIndex: currentSelectedIndex)
+                }
+                else if currentSelectedIndex == 2 {
+                    ListView(todoList: thirdTodoList, segmentIndex: currentSelectedIndex)
                 }
             }
-            .sheet(isPresented: $isSheetShowing) {
-                settingView()
+            .background(Color.background)
+            .toolbar {
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                    Button {
+                        isSheetShowing = true
+                    } label: {
+                        Image(systemName: "gear")
+                    }
+                }
+                ToolbarItem(placement: ToolbarItemPlacement.principal) {
+                    Text("왓투두")
+                }
             }
         }
-        .onTapGesture {
-            self.endEditing()
+        .sheet(isPresented: $isSheetShowing) {
+            settingView()
         }
     }
 }
@@ -132,12 +127,5 @@ extension ContentView {
                 Spacer()
             }
         }
-    }
-}
-
-// function
-extension ContentView {
-    private func endEditing() {
-        UIApplication.shared.endEditing()
     }
 }
