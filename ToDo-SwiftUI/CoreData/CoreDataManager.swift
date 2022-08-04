@@ -74,17 +74,6 @@ class CoreDataManager: ObservableObject {
         save(context: context)
     }
 
-    func deleteCategory(category: CategoryEntity, context: NSManagedObjectContext) {
-
-        context.delete(category)
-        
-        do{
-            try context.save()
-        } catch {
-            print("FAILED TO DELETE DATA")
-        }
-    }
-
     func createTodo(task: String, segment: Int, context: NSManagedObjectContext) {
 
         let todo = TodoEntity(context: context)
@@ -94,6 +83,22 @@ class CoreDataManager: ObservableObject {
         todo.isDone = false
 
         save(context: context)
+    }
+
+    func editTodo(todo: TodoEntity, context: NSManagedObjectContext) {
+        todo.isDone.toggle()
+        save(context: context)
+    }
+    
+    func deleteCategory(category: CategoryEntity, context: NSManagedObjectContext) {
+
+        context.delete(category)
+
+        do{
+            try context.save()
+        } catch {
+            print("FAILED TO DELETE DATA")
+        }
     }
 
     func deleteTodo(todo: TodoEntity, context: NSManagedObjectContext) {
@@ -119,11 +124,4 @@ class CoreDataManager: ObservableObject {
             print("FAILED TO DELETE DATA")
         }
     }
-
-    func editTodo(todo: TodoEntity, context: NSManagedObjectContext) {
-        todo.isDone.toggle()
-        save(context: context)
-    }
-
-
 }

@@ -20,7 +20,7 @@ struct DetailPageView: View {
     var body: some View {
 
         List {
-            Section("추가") {
+            Section("할일 추가") {
                 TextField("입력", text: $viewModel.userInput) {
                     viewModel.createTodo(context: managedObjectContext)
                     viewModel.getAllTodos(context: managedObjectContext)

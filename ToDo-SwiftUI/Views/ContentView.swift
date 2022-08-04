@@ -22,7 +22,7 @@ struct ContentView: View {
 
         NavigationView {
             List {
-                Section("추가") {
+                Section("카테고리 추가") {
                     TextField("입력", text: $viewModel.userInput) {
                         viewModel.createCategory(context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
@@ -45,17 +45,21 @@ struct ContentView: View {
                                 Spacer()
                             }
                         }
-                    }
-                    .onDelete(perform: { indexes in
-                        for index in indexes {
-                            isAlertShowing = true
-                            viewModel.deletionIndex = index
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button {
+                                viewModel.selectedCategory = category
+                                isAlertShowing = true
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                            .tint(.red)
+
                         }
-                    })
+                    }
                 }
                 .alert(isPresented: $isAlertShowing, content: {
                     Alert(title: Text("삭제 하시겠습니까?"), primaryButton: .destructive(Text("삭제")) {
-                        viewModel.deleteCategory(category: viewModel.categoryList[viewModel.deletionIndex], context: managedObjectContext)
+                        viewModel.deleteCategory(category: viewModel.selectedCategory, context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
                     }, secondaryButton: .cancel(Text("취소")))
                 })
