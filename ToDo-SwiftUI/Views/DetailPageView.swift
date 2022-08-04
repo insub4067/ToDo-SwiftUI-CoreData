@@ -16,6 +16,7 @@ struct DetailPageView: View {
     }
     
     @ObservedObject var viewModel = DetailPageViewModel()
+    @FocusState var isFocused
 
     var body: some View {
 
@@ -34,9 +35,11 @@ struct DetailPageView: View {
                 TextField("입력", text: $viewModel.userInput) {
                     viewModel.createTodo(context: managedObjectContext)
                     viewModel.getAllTodos(context: managedObjectContext)
+                    isFocused = true
                 }
                 .foregroundColor(Color.textColor)
                 .listRowBackground(Color.background)
+                .focused($isFocused)
             }
             Section( header: HStack {
                 Text("진행중")

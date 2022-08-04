@@ -18,7 +18,6 @@ struct ContentView: View {
     let coreDataManager = CoreDataManager()
 
     init() {
-
         UITableView.appearance().backgroundColor = UIColor(Color.background)
         UITableViewHeaderFooterView.appearance().tintColor = UIColor(Color.background)
 
@@ -33,14 +32,6 @@ struct ContentView: View {
 
         NavigationView {
             List {
-//                Section("카테고리 추가") {
-//                    TextField("입력", text: $viewModel.userInput) {
-//                        viewModel.createCategory(context: managedObjectContext)
-//                        viewModel.getAllCategories(context: managedObjectContext)
-//                    }
-//                    .foregroundColor(Color.textColor)
-//                    .listRowBackground(Color.background)
-//                }
 
                 Section(header: HStack {
                     Text("카테고리 추가")
@@ -56,9 +47,11 @@ struct ContentView: View {
                     TextField("입력", text: $viewModel.userInput) {
                         viewModel.createCategory(context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
+                        isFocused = true
                     }
                     .foregroundColor(Color.textColor)
                     .listRowBackground(Color.background)
+                    .focused($isFocused)
                 }
 
                 Section(header: HStack {
@@ -87,7 +80,6 @@ struct ContentView: View {
                         }
                         .listRowBackground(Color.background)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-
                             // Category 삭제 버튼
                             Button {
                                 viewModel.selectedCategory = category
@@ -123,10 +115,10 @@ struct ContentView: View {
                 })
             }
             .listStyle(.inset)
-            .onAppear {
-                viewModel.getAllCategories(context: managedObjectContext)
-                viewModel.getAllCategories(context: managedObjectContext)
-            }
+        }
+        .onAppear {
+            viewModel.getAllCategories(context: managedObjectContext)
+            viewModel.getAllCategories(context: managedObjectContext)
         }
     }
 }

@@ -17,23 +17,41 @@ final class ContentViewModel: ObservableObject {
     @Published var isAlertShowing = false
 
     func getAllCategories(context: NSManagedObjectContext) {
-
-        let response = CoreDataManager.shared.getAllCategories(context: context)
+        let response = CoreDataManager
+            .shared
+            .getAllCategories(
+                context: context
+            )
         categoryList = response ?? [CategoryEntity()]
     }
 
     func createCategory(context: NSManagedObjectContext) {
-
-        CoreDataManager.shared.createCategory(title: userInput, context: context)
+        CoreDataManager
+            .shared
+            .createCategory(
+                title: userInput,
+                context: context
+            )
         userInput = ""
     }
 
     func deleteCategory(category: CategoryEntity, context: NSManagedObjectContext) {
 
-        CoreDataManager.shared.deleteCategory(category: category, context: context)
+        CoreDataManager
+            .shared
+            .deleteCategory(
+                category: category,
+                context: context
+            )
     }
 
     func editCategory(title: String, category: CategoryEntity, context: NSManagedObjectContext) {
-        CoreDataManager.shared.editCategory(title: title, category: category, context: context)
+        CoreDataManager
+            .shared
+            .editCategory(
+                title: title,
+                category: category,
+                context: context
+            )
     }
 }
