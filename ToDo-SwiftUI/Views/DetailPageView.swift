@@ -20,14 +20,34 @@ struct DetailPageView: View {
     var body: some View {
 
         List {
-            Section("할일 추가") {
+            Section(header: HStack {
+                Text("할일 추가")
+                    .foregroundColor(Color.textColor)
+                    .opacity(0.5)
+                Spacer()
+            }
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .padding(.vertical, 5)
+                .padding(.leading, 15)
+                .background(Color.background)
+            ) {
                 TextField("입력", text: $viewModel.userInput) {
                     viewModel.createTodo(context: managedObjectContext)
                     viewModel.getAllTodos(context: managedObjectContext)
                 }
+                .foregroundColor(Color.textColor)
                 .listRowBackground(Color.background)
             }
-            Section("진행중") {
+            Section( header: HStack {
+                Text("진행중")
+                    .foregroundColor(Color.textColor)
+                    .opacity(0.5)
+                Spacer()
+            }
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .padding(.vertical, 5)
+                .padding(.leading, 15)
+                .background(Color.background)) {
                 ForEach(viewModel.inProgressTodos) { todo in
 
                     HStack {
@@ -41,6 +61,7 @@ struct DetailPageView: View {
                         }
                         Text(todo.task ?? "")
                     }
+                    .foregroundColor(Color.textColor)
                     .opacity(0.8)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
@@ -54,7 +75,16 @@ struct DetailPageView: View {
                 .listRowBackground(Color.background)
             }
 
-            Section("완료") {
+            Section(header: HStack {
+                Text("완료")
+                    .foregroundColor(Color.textColor)
+                    .opacity(0.5)
+                Spacer()
+            }
+                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .padding(.vertical, 5)
+                .padding(.leading, 15)
+                .background(Color.background)) {
                 ForEach(viewModel.doneTodos) { todo in
 
                     HStack {
@@ -69,6 +99,7 @@ struct DetailPageView: View {
                         Text(todo.task ?? "")
                             .strikethrough()
                     }
+                    .foregroundColor(Color.textColor)
                     .opacity(0.6)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {

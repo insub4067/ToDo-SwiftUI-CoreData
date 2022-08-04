@@ -18,23 +18,60 @@ struct ContentView: View {
     let coreDataManager = CoreDataManager()
 
     init() {
+
         UITableView.appearance().backgroundColor = UIColor(Color.background)
+        UITableViewHeaderFooterView.appearance().tintColor = UIColor(Color.background)
+
+        let navBarAppearance = UINavigationBar.appearance()
+
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Color.accentColor)]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(Color.accentColor)]
+        navBarAppearance.barTintColor = UIColor(Color.background)
     }
 
     var body: some View {
 
         NavigationView {
             List {
-                Section("카테고리 추가") {
+//                Section("카테고리 추가") {
+//                    TextField("입력", text: $viewModel.userInput) {
+//                        viewModel.createCategory(context: managedObjectContext)
+//                        viewModel.getAllCategories(context: managedObjectContext)
+//                    }
+//                    .foregroundColor(Color.textColor)
+//                    .listRowBackground(Color.background)
+//                }
+
+                Section(header: HStack {
+                    Text("카테고리 추가")
+                        .foregroundColor(Color.textColor)
+                        .opacity(0.5)
+                    Spacer()
+                }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .padding(.vertical, 5)
+                    .padding(.leading, 15)
+                    .background(Color.background))
+                {
                     TextField("입력", text: $viewModel.userInput) {
                         viewModel.createCategory(context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
                     }
+                    .foregroundColor(Color.textColor)
                     .listRowBackground(Color.background)
                 }
 
-
-                Section("카테고리 목록") {
+                Section(header: HStack {
+                    Text("카테고리 목록")
+                        .foregroundColor(Color.textColor)
+                        .opacity(0.5)
+                    Spacer()
+                }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .padding(.vertical, 5)
+                    .padding(.leading, 15)
+                    .background(Color.background))
+                {
                     ForEach(viewModel.categoryList, id: \.self) { category in
 
                         ZStack{
@@ -43,10 +80,12 @@ struct ContentView: View {
 
                             HStack{
                                 Text(category.title ?? "")
+                                    .foregroundColor(Color.textColor)
                                     .opacity(0.8)
                                 Spacer()
                             }
                         }
+                        .listRowBackground(Color.background)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
 
                             // Category 삭제 버튼
@@ -76,7 +115,6 @@ struct ContentView: View {
                     }
                 }
                 .navigationBarTitle("카테고리")
-                .listRowBackground(Color.background)
                 .alert(isPresented: $viewModel.isAlertShowing, content: {
                     Alert(title: Text("삭제 하시겠습니까?"), primaryButton: .destructive(Text("삭제")) {
                         viewModel.deleteCategory(category: viewModel.selectedCategory, context: managedObjectContext)
