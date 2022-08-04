@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailPageView: View {
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var managedObjectContext
 
     init(category: CategoryEntity) {
@@ -35,7 +36,7 @@ struct DetailPageView: View {
                                 viewModel.getAllTodos(context: managedObjectContext)
                             }
                         } label: {
-                            Image(systemName: "checkmark.square")
+                            Image(systemName: "square")
                         }
                         Text(todo.task ?? "")
                     }
@@ -61,12 +62,12 @@ struct DetailPageView: View {
                                 viewModel.getAllTodos(context: managedObjectContext)
                             }
                         } label: {
-                            Image(systemName: "checkmark.square.fill")
+                            Image(systemName: "checkmark.square")
                         }
                         Text(todo.task ?? "")
                             .strikethrough()
                     }
-                    .opacity(0.5)
+                    .opacity(0.6)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
                             viewModel.deleteTodo(todo: todo, context: managedObjectContext)

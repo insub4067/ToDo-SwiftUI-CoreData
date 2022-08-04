@@ -14,6 +14,7 @@ final class ContentViewModel: ObservableObject {
 
     @Published var userInput = ""
     @Published var categoryList: Array<CategoryEntity> = []
+    @Published var deletionIndex = 0
 
     func getAllCategories(context: NSManagedObjectContext) {
 
