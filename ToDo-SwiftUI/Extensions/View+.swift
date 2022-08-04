@@ -11,7 +11,7 @@ import SwiftUI
 extension View {
     func customAlert(primaryAction: @escaping (String) -> Void, secondaryAction: @escaping () -> Void) -> () {
 
-        let alert = UIAlertController(title: "이름 수정", message: "변경할 카테고리의 이름을 입력하세요.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "이름 변경", message: "새로운 이름을 입력하세요.", preferredStyle: .alert)
         alert.addTextField { field in
             field.placeholder = "입력"
         }
