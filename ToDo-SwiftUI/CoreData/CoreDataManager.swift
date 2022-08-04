@@ -89,6 +89,11 @@ class CoreDataManager: ObservableObject {
         todo.isDone.toggle()
         save(context: context)
     }
+
+    func editCategory(title: String, category: CategoryEntity, context: NSManagedObjectContext) {
+        category.title = title
+        save(context: context)
+    }
     
     func deleteCategory(category: CategoryEntity, context: NSManagedObjectContext) {
 

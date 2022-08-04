@@ -25,6 +25,7 @@ struct DetailPageView: View {
                     viewModel.createTodo(context: managedObjectContext)
                     viewModel.getAllTodos(context: managedObjectContext)
                 }
+                .listRowBackground(Color.background)
             }
             Section("진행중") {
                 ForEach(viewModel.inProgressTodos) { todo in
@@ -50,6 +51,7 @@ struct DetailPageView: View {
                         .tint(.red)
                     }
                 }
+                .listRowBackground(Color.background)
             }
 
             Section("완료") {
@@ -77,8 +79,10 @@ struct DetailPageView: View {
                         .tint(.red)
                     }
                 }
+                .listRowBackground(Color.background)
             }
         }
+        .navigationBarTitle(viewModel.category.title ?? "")
         .listStyle(.inset)
         .onAppear{
             viewModel.getAllTodos(context: managedObjectContext)

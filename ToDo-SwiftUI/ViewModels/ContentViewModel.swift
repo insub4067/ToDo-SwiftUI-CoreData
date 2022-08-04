@@ -15,6 +15,7 @@ final class ContentViewModel: ObservableObject {
     @Published var userInput = ""
     @Published var categoryList: Array<CategoryEntity> = []
     @Published var selectedCategory = CategoryEntity()
+    @Published var isAlertShowing = false
 
     func getAllCategories(context: NSManagedObjectContext) {
 
@@ -31,5 +32,9 @@ final class ContentViewModel: ObservableObject {
     func deleteCategory(category: CategoryEntity, context: NSManagedObjectContext) {
 
         CoreDataManager.shared.deleteCategory(category: category, context: context)
+    }
+
+    func editCategory(title: String, category: CategoryEntity, context: NSManagedObjectContext) {
+        CoreDataManager.shared.editCategory(title: title, category: category, context: context)
     }
 }

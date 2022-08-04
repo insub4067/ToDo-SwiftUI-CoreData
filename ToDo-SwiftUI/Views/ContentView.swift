@@ -13,10 +13,13 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
     @ObservedObject var viewModel = ContentViewModel()
-    @State var isAlertShowing = false
     @FocusState var isFocused
 
     let coreDataManager = CoreDataManager()
+
+    init() {
+        UITableView.appearance().backgroundColor = UIColor(Color.background)
+    }
 
     var body: some View {
 
@@ -27,7 +30,7 @@ struct ContentView: View {
                         viewModel.createCategory(context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
                     }
-                    .focused($isFocused)
+                    .listRowBackground(Color.background)
                 }
 
 
@@ -37,7 +40,6 @@ struct ContentView: View {
                         ZStack{
                             NavigationLink(category.title ?? "", destination: DetailPageView(category: category))
                             .opacity(0)
-                            .navigationBarTitle("")
 
                             HStack{
                                 Text(category.title ?? "")
@@ -46,18 +48,36 @@ struct ContentView: View {
                             }
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+
+                            // Category 삭제 버튼
                             Button {
                                 viewModel.selectedCategory = category
-                                isAlertShowing = true
+                                viewModel.isAlertShowing = true
                             } label: {
                                 Image(systemName: "trash")
                             }
                             .tint(.red)
 
+                            // Category 수정 버튼
+                            Button {
+                                viewModel.selectedCategory = category
+                                customAlert() { userInput in
+                                    viewModel.editCategory(title: userInput, category: category, context: managedObjectContext)
+                                    viewModel.getAllCategories(context: managedObjectContext)
+                                } secondaryAction: {
+                                    print("DEBUG")
+                                }
+
+                            } label: {
+                                Image(systemName: "square.and.pencil")
+                            }
+                            .tint(.yellow)
                         }
                     }
                 }
-                .alert(isPresented: $isAlertShowing, content: {
+                .navigationBarTitle("카테고리")
+                .listRowBackground(Color.background)
+                .alert(isPresented: $viewModel.isAlertShowing, content: {
                     Alert(title: Text("삭제 하시겠습니까?"), primaryButton: .destructive(Text("삭제")) {
                         viewModel.deleteCategory(category: viewModel.selectedCategory, context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
@@ -65,7 +85,6 @@ struct ContentView: View {
                 })
             }
             .listStyle(.inset)
-            .background(Color.background)
             .onAppear {
                 viewModel.getAllCategories(context: managedObjectContext)
                 viewModel.getAllCategories(context: managedObjectContext)
