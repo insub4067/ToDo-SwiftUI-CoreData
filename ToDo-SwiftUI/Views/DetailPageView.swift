@@ -35,7 +35,7 @@ struct DetailPageView: View {
                 TextField("입력", text: $viewModel.userInput) {
                     viewModel.createTodo(context: managedObjectContext)
                     viewModel.getAllTodos(context: managedObjectContext)
-                    isFocused = true
+//                    isFocused = true
                 }
                 .foregroundColor(Color.textColor)
                 .listRowBackground(Color.background)
@@ -114,6 +114,17 @@ struct DetailPageView: View {
                     }
                 }
                 .listRowBackground(Color.background)
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: ToolbarItemPlacement.keyboard) {
+                    Button("") {}
+                    Button {
+                        isFocused = false
+                    } label: {
+                        Text("닫기")
+                            .foregroundColor(Color.accentColor)
+                    }
+                }
             }
         }
         .navigationBarTitle(viewModel.category.title ?? "")

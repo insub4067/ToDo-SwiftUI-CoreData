@@ -32,7 +32,6 @@ struct ContentView: View {
 
         NavigationView {
             List {
-
                 Section(header: HStack {
                     Text("카테고리 추가")
                         .foregroundColor(Color.textColor)
@@ -47,7 +46,7 @@ struct ContentView: View {
                     TextField("입력", text: $viewModel.userInput) {
                         viewModel.createCategory(context: managedObjectContext)
                         viewModel.getAllCategories(context: managedObjectContext)
-                        isFocused = true
+//                        isFocused = true
                     }
                     .foregroundColor(Color.textColor)
                     .listRowBackground(Color.background)
@@ -115,6 +114,17 @@ struct ContentView: View {
                 })
             }
             .listStyle(.inset)
+            .toolbar {
+                ToolbarItemGroup(placement: ToolbarItemPlacement.keyboard) {
+                    Button("") {}
+                    Button {
+                        isFocused = false
+                    } label: {
+                        Text("닫기")
+                            .foregroundColor(Color.accentColor)
+                    }
+                }
+            }
         }
         .onAppear {
             viewModel.getAllCategories(context: managedObjectContext)
