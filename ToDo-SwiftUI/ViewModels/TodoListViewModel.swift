@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreData
 
-final class DetailPageViewModel: ObservableObject {
+final class TodoListViewModel: ObservableObject {
 
     @Published var userInput = ""
     @Published var todoList: Array<TodoEntity> = []
@@ -18,8 +18,29 @@ final class DetailPageViewModel: ObservableObject {
 
     var category = CategoryEntity()
 
+    func viewDidAppear(context: NSManagedObjectContext) {
+        getAllTodos(context: context)
+    }
+
+    func didSubmitTextField(context: NSManagedObjectContext) {
+        createTodo(context: context)
+        getAllTodos(context: context)
+    }
+
+    func didTapTodo(todo: TodoEntity, context: NSManagedObjectContext) {
+        editTodo(todo: todo, context: context)
+        getAllTodos(context: context)
+    }
+
+    func didDetectSwipeGesture(todo: TodoEntity,context: NSManagedObjectContext) {
+        deleteTodo(todo: todo, context: context)
+    }
+}
+
+extension TodoListViewModel {
+
     func getAllTodos(context: NSManagedObjectContext) {
-        
+
         let response = CoreDataManager.shared.getAllTodos(of: category, context: context)
         todoList = response ?? [TodoEntity()]
 

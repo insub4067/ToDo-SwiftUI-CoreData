@@ -9,12 +9,39 @@ import SwiftUI
 import Combine
 import CoreData
 
-final class ContentViewModel: ObservableObject {
+final class CategoryListViewModel: ObservableObject {
 
     @Published var userInput = ""
     @Published var categoryList: Array<CategoryEntity> = []
-    @Published var selectedCategory = CategoryEntity()
+    @Published var selectedCategory: CategoryEntity? = nil
     @Published var isAlertShowing = false
+
+    func viewDidAppear(context: NSManagedObjectContext) {
+        getAllCategories(context: context)
+    }
+
+    func didSubmitTextField(context: NSManagedObjectContext) {
+        createCategory(context: context)
+        getAllCategories(context: context)
+    }
+
+    func didTapDeleteButton(category: CategoryEntity) {
+        selectedCategory = category
+        isAlertShowing = true
+    }
+
+    func didAllowDeletion(context: NSManagedObjectContext) {
+        deleteCategory(context: context)
+        getAllCategories(context: context)
+    }
+
+    func didTapEditButton(newValue: String, category: CategoryEntity, context: NSManagedObjectContext) {
+        editCategory(title: newValue, category: category, context: context)
+        getAllCategories(context: context)
+    }
+}
+
+extension CategoryListViewModel {
 
     func getAllCategories(context: NSManagedObjectContext) {
         let response = CoreDataManager
@@ -35,12 +62,11 @@ final class ContentViewModel: ObservableObject {
         userInput = ""
     }
 
-    func deleteCategory(category: CategoryEntity, context: NSManagedObjectContext) {
-
+    func deleteCategory(context: NSManagedObjectContext) {
         CoreDataManager
             .shared
             .deleteCategory(
-                category: category,
+                category: selectedCategory ?? CategoryEntity(),
                 context: context
             )
     }

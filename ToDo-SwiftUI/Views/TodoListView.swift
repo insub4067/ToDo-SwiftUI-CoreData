@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailPageView: View {
+struct TodoListView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -15,7 +15,7 @@ struct DetailPageView: View {
         viewModel.category = category
     }
     
-    @ObservedObject var viewModel = DetailPageViewModel()
+    @ObservedObject var viewModel = TodoListViewModel()
     @FocusState var isFocused
 
     var body: some View {
@@ -33,8 +33,7 @@ struct DetailPageView: View {
                 .background(Color.background)
             ) {
                 TextField("입력", text: $viewModel.userInput) {
-                    viewModel.createTodo(context: managedObjectContext)
-                    viewModel.getAllTodos(context: managedObjectContext)
+                    viewModel.didSubmitTextField(context: managedObjectContext)
 //                    isFocused = true
                 }
                 .foregroundColor(Color.textColor)
@@ -56,8 +55,7 @@ struct DetailPageView: View {
                     HStack {
                         Button {
                             withAnimation {
-                                viewModel.editTodo(todo: todo, context: managedObjectContext)
-                                viewModel.getAllTodos(context: managedObjectContext)
+                                viewModel.didTapTodo(todo: todo, context: managedObjectContext)
                             }
                         } label: {
                             Image(systemName: "square")
@@ -68,7 +66,7 @@ struct DetailPageView: View {
                     .opacity(0.8)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
-                            viewModel.deleteTodo(todo: todo, context: managedObjectContext)
+                            viewModel.didDetectSwipeGesture(todo: todo, context: managedObjectContext)
                         } label: {
                             Image(systemName: "trash")
                         }
@@ -93,8 +91,7 @@ struct DetailPageView: View {
                     HStack {
                         Button {
                             withAnimation {
-                                viewModel.editTodo(todo: todo, context: managedObjectContext)
-                                viewModel.getAllTodos(context: managedObjectContext)
+                                viewModel.didTapTodo(todo: todo, context: managedObjectContext)
                             }
                         } label: {
                             Image(systemName: "checkmark.square")
@@ -106,7 +103,7 @@ struct DetailPageView: View {
                     .opacity(0.6)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button {
-                            viewModel.deleteTodo(todo: todo, context: managedObjectContext)
+                            viewModel.didDetectSwipeGesture(todo: todo, context: managedObjectContext)
                         } label: {
                             Image(systemName: "trash")
                         }
@@ -130,7 +127,7 @@ struct DetailPageView: View {
         .navigationBarTitle(viewModel.category.title ?? "")
         .listStyle(.inset)
         .onAppear{
-            viewModel.getAllTodos(context: managedObjectContext)
+            viewModel.viewDidAppear(context: managedObjectContext)
         }
     }
 }

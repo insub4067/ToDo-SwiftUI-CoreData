@@ -13,7 +13,7 @@ struct ToDo_SwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CategoryListView()
                 .environment(\.managedObjectContext, coreDataManager.container.viewContext)
         }
     }

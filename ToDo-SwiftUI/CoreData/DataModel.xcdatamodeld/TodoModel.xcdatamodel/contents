@@ -3,6 +3,7 @@
     <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="todo" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TodoEntity" inverseName="category" inverseEntity="TodoEntity"/>
     </entity>
@@ -15,7 +16,7 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="todo" inverseEntity="CategoryEntity"/>
     </entity>
     <elements>
-        <element name="CategoryEntity" positionX="-54" positionY="27" width="128" height="89"/>
+        <element name="CategoryEntity" positionX="-54" positionY="27" width="128" height="104"/>
         <element name="TodoEntity" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

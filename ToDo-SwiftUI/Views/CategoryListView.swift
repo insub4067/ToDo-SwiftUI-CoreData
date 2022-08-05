@@ -9,10 +9,10 @@ import SwiftUI
 import Combine
 import CoreData
 
-struct ContentView: View {
+struct CategoryListView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
 
-    @ObservedObject var viewModel = ContentViewModel()
+    @ObservedObject var viewModel = CategoryListViewModel()
     @FocusState var isFocused
 
     let coreDataManager = CoreDataManager()
@@ -44,8 +44,7 @@ struct ContentView: View {
                     .background(Color.background))
                 {
                     TextField("입력", text: $viewModel.userInput) {
-                        viewModel.createCategory(context: managedObjectContext)
-                        viewModel.getAllCategories(context: managedObjectContext)
+                        viewModel.didSubmitTextField(context: managedObjectContext)
 //                        isFocused = true
                     }
                     .foregroundColor(Color.textColor)
@@ -67,10 +66,14 @@ struct ContentView: View {
                     ForEach(viewModel.categoryList, id: \.self) { category in
 
                         ZStack{
-                            NavigationLink(category.title ?? "", destination: DetailPageView(category: category))
+                            NavigationLink(category.title ?? "", destination: TodoListView(category: category))
                             .opacity(0)
 
                             HStack{
+                                Image(systemName: "circlebadge.fill")
+                                    .resizable()
+                                    .frame(width: 3, height: 3)
+                                    .foregroundColor(Color.accentColor)
                                 Text(category.title ?? "")
                                     .foregroundColor(Color.textColor)
                                     .opacity(0.8)
@@ -81,8 +84,7 @@ struct ContentView: View {
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             // Category 삭제 버튼
                             Button {
-                                viewModel.selectedCategory = category
-                                viewModel.isAlertShowing = true
+                                viewModel.didTapDeleteButton(category: category)
                             } label: {
                                 Image(systemName: "trash")
                             }
@@ -90,30 +92,35 @@ struct ContentView: View {
 
                             // Category 수정 버튼
                             Button {
-                                viewModel.selectedCategory = category
-                                customAlert() { userInput in
-                                    viewModel.editCategory(title: userInput, category: category, context: managedObjectContext)
-                                    viewModel.getAllCategories(context: managedObjectContext)
+                                customAlert() { newValue in
+                                    viewModel.didTapEditButton(newValue: newValue, category: category, context: managedObjectContext)
                                 } secondaryAction: {
                                     print("DEBUG")
                                 }
-
                             } label: {
                                 Image(systemName: "square.and.pencil")
                             }
                             .tint(.yellow)
                         }
                     }
+                    .onMove { indexSet, Int in
+//                        for idx in indexSet {
+//                            let category = viewModel.categoryList[idx]
+//                            print(category.title)
+//                        }
+                    }
                 }
                 .navigationBarTitle("카테고리")
                 .alert(isPresented: $viewModel.isAlertShowing, content: {
                     Alert(title: Text("삭제 하시겠습니까?"), primaryButton: .destructive(Text("삭제")) {
-                        viewModel.deleteCategory(category: viewModel.selectedCategory, context: managedObjectContext)
-                        viewModel.getAllCategories(context: managedObjectContext)
+                        viewModel.didAllowDeletion(context: managedObjectContext)
                     }, secondaryButton: .cancel(Text("취소")))
                 })
             }
             .listStyle(.inset)
+            .toolbar {
+                EditButton()
+            }
             .toolbar {
                 ToolbarItemGroup(placement: ToolbarItemPlacement.keyboard) {
                     Button("") {}
@@ -127,8 +134,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            viewModel.getAllCategories(context: managedObjectContext)
-            viewModel.getAllCategories(context: managedObjectContext)
+            viewModel.viewDidAppear(context: managedObjectContext)
         }
     }
 }
